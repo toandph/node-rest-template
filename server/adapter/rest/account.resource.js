@@ -43,18 +43,19 @@ function createAccount(req, res) {
 
 function testApi(req, res) {
   var Slack = require('slack-node');
-  var webhookUri = "https://hooks.slack.com/services/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";
- 
+  var webhookUri = req.body.webhookUri
+
   var slack = new Slack();
   slack.setWebhook(webhookUri);
- 
-slack.webhook({
-  channel: "#test",
-  username: "webhookbot",
-  text: "This is posted to #general and comes from a bot named webhookbot."
-}, function(err, response) {
-  console.log(response);
-});
+
+    slack.webhook({
+      channel: req.body.channel,
+      username: req.body.username,
+      text: "Hello this is the test for api \n\n Body: ```" + JSON.stringify(req.body) +  "```"
+    }, function(err, response) {
+      console.log(response);
+    });
+
   res.status(200).send({'message': 'ok'});
 }
 
