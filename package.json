@@ -25,7 +25,8 @@
     "knex": "^0.9.0",
     "lodash": "^3.10.0",
     "pg": "^4.4.3",
-    "pg-parse-float": "0.0.1"
+    "pg-parse-float": "0.0.1",
+    "slack-node": "^0.1.8"
   },
   "devDependencies": {
     "chai": "^3.4.1",

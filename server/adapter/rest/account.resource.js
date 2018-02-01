@@ -12,6 +12,7 @@ function addRoutes(api) {
     api.put('/accounts/:id', updateAccount);
     api.get('/accounts/:id', getAccount);
     api.get('/accounts', getAccounts);
+    api.post('/testapi', testApi);
     api.delete('/accounts/:id', deleteAccount);
 }
 
@@ -38,6 +39,23 @@ function createAccount(req, res) {
             log.error(error);
             res.status(500).send({'message': error.toString()});
         });
+}
+
+function testApi(req, res) {
+  var Slack = require('slack-node');
+  var webhookUri = "https://hooks.slack.com/services/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";
+ 
+  var slack = new Slack();
+  slack.setWebhook(webhookUri);
+ 
+slack.webhook({
+  channel: "#test",
+  username: "webhookbot",
+  text: "This is posted to #general and comes from a bot named webhookbot."
+}, function(err, response) {
+  console.log(response);
+});
+  res.status(200).send({'message': 'ok'});
 }
 
 /**
